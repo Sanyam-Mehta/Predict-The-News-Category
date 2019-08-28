@@ -301,10 +301,8 @@ all_segment_ids = torch.tensor([f.segment_ids for f in train_features], dtype=to
 all_label_ids = torch.tensor([f.label_ids for f in train_features], dtype=torch.long)
 train_data = TensorDataset(all_input_ids, all_input_mask, all_segment_ids, all_label_ids)
 
-if True:
-    train_sampler = RandomSampler(train_data)  ##Read about sampling and which sampler is better
-# else:
-#   train_sampler = DistributedSampler(train_data)
+
+train_sampler = RandomSampler(train_data)  
 train_dataloader = DataLoader(train_data, sampler=train_sampler, batch_size=args['train_batch_size'])
 
 ##required for optimizer only
